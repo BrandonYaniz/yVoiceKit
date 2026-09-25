@@ -10,3 +10,12 @@ public enum VoiceError: Error, Sendable, Equatable {
     case cancelled
     case providerFailed(String)
 }
+
+extension VoiceError {
+    /// Retains normalized errors and diagnostic text while avoiding runtime error types in app logic.
+    public static func normalizing(_ error: any Error) -> VoiceError {
+        if let error = error as? VoiceError { return error }
+        if error is CancellationError { return .cancelled }
+        return .providerFailed(String(describing: error))
+    }
+}

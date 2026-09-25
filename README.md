@@ -12,6 +12,14 @@ Pre-alpha.
 
 The public API is not stable yet.
 
+Stage 1 implements provider-neutral request, reference, PCM audio, result,
+provenance, progress and option types with validation and unit tests. See
+[API shape and example](docs/api-shape.md).
+
+Speech generation is not implemented yet. The Qwen product remains a placeholder;
+the deterministic mock and execution protocols are the next stage. No external
+runtime dependencies or model downloads are required for current tests.
+
 ## Developer
 
 Brandon Yaniz
@@ -55,7 +63,7 @@ yVoiceKit
     Provider-neutral voice APIs and shared types.
 
 yVoiceKitQwen
-    Qwen3-TTS provider implementation.
+    Qwen3-TTS provider placeholder; native runtime integration is planned.
 ```
 
 Future provider products may be added only when a concrete, maintainable implementation exists.
@@ -113,3 +121,24 @@ Because this is a Swift package, no `.xcodeproj` is required. Open the package d
 - Preserve exact model/runtime provenance when material.
 - Keep default CI independent of multi-gigabyte model downloads.
 - Do not add generic abstractions until there is a concrete second use.
+
+### Local toolchain workaround
+
+On the current Swift 6.4 Command Line Tools installation, the default backend
+needs an explicit Swift Testing macro plugin path. This iCloud checkout also needs
+test build artifacts outside the synced directory to avoid code-signing metadata
+errors. The following command redirects caches and build artifacts and supplies
+the installed plugin path:
+
+```sh
+CLANG_MODULE_CACHE_PATH="$PWD/.build/clang-cache" \
+SWIFTPM_MODULECACHE_OVERRIDE="$PWD/.build/module-cache" \
+swift test --disable-sandbox \
+  --scratch-path /private/tmp/yVoiceKit-stage1-build \
+  --cache-path /private/tmp/yVoiceKit-stage1-cache \
+  -Xswiftc -plugin-path \
+  -Xswiftc /Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing
+```
+
+This is an environment workaround; it adds no package dependency. The package has
+no build plugins. `--disable-sandbox` disables SwiftPM's nested sandbox for this run.

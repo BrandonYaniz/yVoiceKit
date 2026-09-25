@@ -2,7 +2,9 @@
 
 ## Qwen3-TTS
 
-Qwen3-TTS is the first production provider target.
+Qwen3-TTS is the first production provider target. The current product is only a
+placeholder: it lists no models and preparation fails explicitly. No runtime,
+model variants, model weight licenses or live smoke test have been verified yet.
 
 Preferred implementation path:
 - native Swift,
