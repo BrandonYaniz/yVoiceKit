@@ -1,0 +1,68 @@
+# Codex project instructions and private planning
+.codex/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# Xcode user-specific data
+DerivedData/
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+xcuserdata/
+
+# Xcode generated / local settings
+*.xccheckout
+*.xcscmblueprint
+*.moved-aside
+
+# Swift playground user data
+timeline.xctimeline
+playground.xcworkspace
+
+# Coverage / test output
+.coverage/
+*.profraw
+*.profdata
+TestResults/
+*.xcresult
+
+# Local environment / credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.mobileprovision
+*.cer
+*.key
+secrets.*
+local-config.*
+
+# Local model / cache artifacts
+Models/
+models/
+ModelCache/
+model-cache/
+Cache/
+cache/
+*.safetensors
+*.gguf
+*.bin
+
+# Temporary generated audio
+tmp/
+temp/
+Temporary/
+*.tmp
+
+# Editor / IDE
+.idea/
+.vscode/
